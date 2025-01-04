@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <!-- Company Slogan -->
+    <div class="text-center mb-4">
+        <h1 class="fw-bold slogan">Your Comfort, Our Commitment</h1>
+        <p class="text-muted">Experience luxury and convenience like never before.</p>
+    </div>
+
+
+    <!-- Video Section -->
+    <div class="video-section mt-4">
+        <div class="position-relative" style="height: 50vh; overflow: hidden; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+            <video autoplay muted loop class="w-100 h-100" style="object-fit: cover;">
+                <source src="static/video/video-1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="overlay d-flex flex-column justify-content-center align-items-center text-white text-shadow" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5);">
+                <h2>Discover the Best Hotels</h2>
+                <p>Find the perfect stay for your next adventure.</p>
+            </div>
+        </div>
+    </div>
+
+     <!-- Welcome Section -->
+     <div class="card p-4 mb-4 shadow-sm">
+        <h2 class="text-center">Your Profile</h2>
+        <p class="text-center">Welcome, <strong>{{ user.username }}</strong>!</p>
+        <div class="text-center">
+            <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+        </div>
+    </div>
+</div>
+
+<style>
+    @font-face {
+        font-family: 'Futura';
+        src: url('https://fonts.cdnfonts.com/s/12016/FuturaLT-Bold.woff') format('woff');
+    }
+    .slogan {
+        font-family: 'arial';
+        font-size: 3.0rem;
+        margin-top: 80px;
+    }
+
+    .text-muted {
+        
+    }
+
+    .text-shadow {
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .h1{
+        color: #fff;
+    }
+    .card {
+        
+        border-radius: 10px;
+    }
+    .video-section .overlay h2 {
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+    }
+    .video-section .overlay p {
+        font-size: 1.2rem;
+    }
+</style>
+{% endblock %}
+
+
+
+
+
+
+
+
+{% comment %} {% extends 'base.html' %}
+
+{% block content %}
+
+    <h2>Your Profile</h2>
+    <p>Welcome, {{ user.username }}!</p>
+    <a href="{% url 'logout' %}">Logout</a>
+{% endblock %} {% endcomment %}

@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="text-center mb-4">
+        <h1 class="text-primary fw-bold">Book Your Stay at {{ hotel.name }}</h1>
+        <p class="text-muted">Secure your stay with a seamless booking experience.</p>
+    </div>
+
+    <!-- Hotel Information -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <h3 class="text-dark">{{ hotel.name }}</h3>
+            <p><strong>Price per Night:</strong> ₹{{ hotel.price_per_night }}</p>
+            <p><strong>Available Rooms:</strong> {{ hotel.available_rooms }}</p>
+        </div>
+    </div>
+
+    <!-- Booking Form -->
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h4 class="text-primary">Fill Your Booking Details</h4>
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-success btn-lg">Book Now</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Back to Hotels -->
+    <div class="text-center mt-4">
+        <a href="{% url 'hotel_list' %}" class="btn btn-secondary">Back to Hotels</a>
+    </div>
+</div>
+{% endblock %}
+
+
+
+
+{% comment %} <!DOCTYPE html>
+<html>
+<head>
+    <title>Book Hotel</title>
+</head>
+<body>
+    <h2>Book {{ hotel.name }}</h2>
+    <p>Price per Night: ₹{{ hotel.price_per_night }}</p>
+    <p>Available Rooms: {{ hotel.available_rooms }}</p>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Book</button>
+    </form>
+
+    {% if booking %}
+        <h3>Your Booking Details</h3>
+        <p>Check-in: {{ booking.check_in }}</p>
+        <p>Check-out: {{ booking.check_out }}</p>
+        <p>Rooms Booked: {{ booking.rooms_booked }}</p>
+        <p>Total Price: ₹{{ booking.total_price }}</p>
+        <a href="{% url 'process_payment' booking.id %}">Proceed to Payment</a>
+    {% endif %}
+
+    <a href="{% url 'hotel_list' %}">Back to Hotels</a>
+</body>
+</html> {% endcomment %}

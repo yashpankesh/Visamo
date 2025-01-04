@@ -1,0 +1,40 @@
+<!-- templates/payment/razorpay_checkout.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Payment</title>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+    <h2>Complete Your Payment</h2>
+    <p>Total Amount: ₹{{ booking.total_price }}</p>
+    <button id="payButton">Pay with Razorpay</button>
+
+    <script>
+        var options = {
+            "key": "{{ razorpay_key_id }}",
+            "amount": "{{ amount }}", // Amount in paisa
+            "currency": "INR",
+            "name": "{{ booking.hotel.name }}",
+            "description": "Booking Payment",
+            "order_id": "{{ razorpay_order_id }}",
+            "handler": function (response){
+                // Redirect to success page with payment details
+                window.location.href = "/payment/success/?payment_id=" + response.razorpay_payment_id;
+            },
+            "prefill": {
+                "name": "{{ booking.user.username }}",
+                "email": "{{ booking.user.email }}"
+            },
+            "theme": {
+                "color": "#3399cc"
+            }
+        };
+        var rzp1 = new Razorpay(options);
+        document.getElementById('payButton').onclick = function(e){
+            rzp1.open();
+            e.preventDefault();
+        }
+    </script>
+</body>
+</html>

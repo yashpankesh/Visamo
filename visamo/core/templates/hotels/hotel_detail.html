@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="card shadow-lg">
+        <div class="row g-0">
+            {% if hotel.image %}
+            <div class="col-md-5">
+                <img src="{{ hotel.image.url }}" alt="{{ hotel.name }}" class="img-fluid rounded-start" style="height: 100%; object-fit: cover;">
+            </div>
+            {% endif %}
+            <div class="{% if hotel.image %}col-md-7{% else %}col-12{% endif %} p-4">
+                <h1 class="text-primary fw-bold">{{ hotel.name }}</h1>
+                <p class="text-muted">{{ hotel.location }}</p>
+                <p>{{ hotel.description }}</p>
+                <p><strong>Price per Night:</strong> <span class="text-success">&#8377;{{ hotel.price_per_night }}</span></p>
+                <p><strong>Available Rooms:</strong> {{ hotel.available_rooms }}</p>
+                <div class="d-flex justify-content-between mt-4">
+                    <a href="{% url 'book_hotel' hotel.id %}" class="btn btn-success btn-lg">Book Now</a>
+                    <a href="/hotels/" class="btn btn-secondary btn-lg">Back to Hotel List</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Nearby Attractions Section -->
+    <div class="mt-5">
+        <h3 class="text-primary">Nearby Attractions</h3>
+        <ul>
+            <li>Local Market - 500m</li>
+            <li>City Center - 2km</li>
+            <li>Popular Tourist Spot - 1.5km</li>
+        </ul>
+    </div>
+
+    <!-- Customer Reviews Section -->
+    <div class="mt-5">
+        <h3 class="text-primary">Customer Reviews</h3>
+        <div class="review">
+            <p><strong>John Doe:</strong> Amazing experience, highly recommended! ⭐⭐⭐⭐⭐</p>
+        </div>
+        <div class="review">
+            <p><strong>Jane Smith:</strong> Great service and cozy rooms. ⭐⭐⭐⭐</p>
+        </div>
+    </div>
+</div>
+
+<style>
+
+    .container {
+        margin-top: 80px;
+    }
+    .card {
+        border: none;
+        border-radius: 15px;
+    }
+    .card h1 {
+        font-size: 2.5rem;
+    }
+    .card p {
+        font-size: 1rem;
+    }
+    .review p {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+        padding: 0.5rem;
+        border-left: 3px solid #007bff;
+        background: #f9f9f9;
+    }
+</style>
+{% endblock %}
+
+
+
+
+
+{% comment %} <!DOCTYPE html>
+<html>
+<head>
+    <title>{{ hotel.name }}</title>
+</head>
+<body>
+    <h2>{{ hotel.name }}</h2>
+    <p>{{ hotel.description }}</p>
+    <p>Location: {{ hotel.location }}</p>
+    <p>Price per Night: &#8377;{{ hotel.price_per_night }}</p>
+    <p>Available Rooms: {{ hotel.available_rooms }}</p>
+    {% if hotel.image %}
+    <img src="{{ hotel.image.url }}" alt="{{ hotel.name }}" style="max-width: 300px;">
+    {% endif %}
+    <a href="{% url 'book_hotel' hotel.id %}">Book Now</a>
+    <a href="/hotels/">Back to Hotel List</a>
+</body>
+</html> {% endcomment %}

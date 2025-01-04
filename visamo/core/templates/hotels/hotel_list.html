@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1 class="text-center text-primary mb-4">Available Hotels</h1>
+
+    <!-- Hotels List -->
+    <div class="row">
+        <div class="col-12">
+            {% for hotel in hotels %}
+            <div class="card shadow-sm mb-4">
+                <div class="row g-0">
+                    {% if hotel.image %}
+                    <div class="col-md-4">
+                        <img src="{{ hotel.image.url }}" class="img-fluid rounded-start" alt="{{ hotel.name }}" style="height: 100%; object-fit: cover;">
+                    </div>
+                    {% endif %}
+                    <div class="{% if hotel.image %}col-md-8{% else %}col-12{% endif %} p-3">
+                        <h3 class="text-primary">{{ hotel.name }}</h3>
+                        <p><strong>Location:</strong> {{ hotel.location }}</p>
+                        <p><strong>Price per Night:</strong> <span class="text-success">&#8377;{{ hotel.price_per_night }}</span></p>
+                        <p><strong>Available Rooms:</strong> {{ hotel.available_rooms }}</p>
+                        <a href="{% url 'hotel_detail' hotel.id %}" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<style>
+
+    .container{
+        font-family: system-ui;
+        color: black;
+    }
+
+    .text-primary {
+        margin-top:80px;
+        --bs-text-opacity: 1;
+        color: #212529 !important;
+    }
+
+    .card {
+        border: none;
+        border-radius: 10px;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    }
+    .card h3 {
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+    .card p {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+    }
+</style>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+{% comment %} <!DOCTYPE html>
+<html>
+<head>
+    <title>Hotels</title>
+</head>
+<body>
+    <h2>Available Hotels</h2>
+    <ul>
+        {% for hotel in hotels %}
+            <li>
+                <h3><a href="{% url 'hotel_detail' hotel.id %}">{{ hotel.name }}</a></h3>
+                <p>{{ hotel.location }}</p>
+                <p>Price per Night: &#8377;{{ hotel.price_per_night }}</p>
+                <p>Available Rooms: {{ hotel.available_rooms }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html> {% endcomment %}
